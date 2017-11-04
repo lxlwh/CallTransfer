@@ -1,6 +1,8 @@
 <resources>
     <string name="app_name">CallTransfer</string>
     <string name="button_home1">CallLog</string>
+    <string name="button_home2">Text_test</string>
+    <string name="button_text">点击我给帅哥发短信</string>
     <string name="calllog_name">名字</string>
     <string name="calllog_number">号码</string>
     <string name="calllog_date">日期</string>
