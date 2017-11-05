@@ -9,4 +9,5 @@
     <string name="calllog_duration">时长</string>
     <string name="calllog_type">类型</string>
     <string name="calllog_per_request_dey">通话记录权限申请被拒绝</string>
+    <string name="msts">你有一个未接电话</string>
 </resources>

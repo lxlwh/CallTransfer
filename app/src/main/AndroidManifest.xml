@@ -3,6 +3,7 @@
     package="com.example.kevin.calltransfer" >
     <uses-permission android:name="android.permission.READ_CALL_LOG"/>
     <uses-permission android:name="android.permission.SEND_SMS"/>
+    <uses-permission android:name="android.permission.READ_PHONE_STATE"/>
 
     <application
         android:allowBackup="true"
@@ -20,6 +21,14 @@
         </activity>
         <activity android:name=".CallLog_view"/>
         <activity android:name=".Text_test"/>
+        <receiver android:name=".PhoneStateReceiver"
+            android:enabled="true"
+            android:exported="true">
+
+            <intent-filter>
+                <action android:name="android.intent.action.PHONE_STATE"/>
+            </intent-filter>
+        </receiver>
     </application>
 
 </manifest>

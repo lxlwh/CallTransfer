@@ -26,10 +26,10 @@ public class Text_test extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.text_test);
 
-        Button button = (Button) findViewById(R.id.button_sendtext);
-        button.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
+//        Button button = (Button) findViewById(R.id.button_sendtext);
+//        button.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
 
                 if(ContextCompat.checkSelfPermission(Text_test.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(Text_test.this, new String[]{Manifest.permission.SEND_SMS}, 1);
@@ -37,10 +37,10 @@ public class Text_test extends Activity {
                     try {
 /*                      Uri uri = Uri.parse("smsto:13752123953");
                         Intent intent = new Intent(Intent.ACTION_SENDTO,uri);
-                        intent.putExtra("sms_body","The ugly guy send this message");
+                        intent.putExtra("sms_body","You got a missed call");
                         startActivity(intent);  */
                         String number = "13752123953";
-                        String mycontent = "The ugly guy send this text";
+                        String mycontent = "You got a missed call";
                         SmsManager manager = SmsManager.getDefault();
                         manager.sendTextMessage(number, null, mycontent, null, null);
                     } catch (Exception e){
@@ -48,7 +48,7 @@ public class Text_test extends Activity {
                     }
                 }
 
-            }
-        });
+//            }
+//        });
     }
 }
