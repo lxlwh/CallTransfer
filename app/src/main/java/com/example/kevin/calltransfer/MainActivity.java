@@ -1,6 +1,5 @@
 package com.example.kevin.calltransfer;
 
-import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
@@ -10,7 +9,6 @@ import android.telephony.TelephonyManager;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
-import android.widget.Toast;
 
 
 public class MainActivity extends AppCompatActivity {
@@ -26,7 +24,7 @@ public class MainActivity extends AppCompatActivity {
 
         Button button_home1 = findViewById(R.id.text_test);
         Button button_home2 = findViewById(R.id.calllog_view);
-        Button button_calltest = findViewById(R.id.button_calltest);
+        Button button_setting = findViewById(R.id.button2);
 
         button_home2.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -44,23 +42,19 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
+        button_setting.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(MainActivity.this, Mysetting.class);
+                startActivity(intent);
+            }
+        });
+
         intentfilter = new IntentFilter();
         intentfilter.addAction("android.intent.action.PHONE_STATE");
         myphonestaterec = new MyPhoneStateReceiver();
         registerReceiver(myphonestaterec, intentfilter);
 
- /*       final IntentFilter Misscallfilter = new IntentFilter();
-        Misscallfilter.addAction("com.android.phone.NotificationMgr.MissedCall_intent");
-        mymissedcall = new MyMissedCall();
-        registerReceiver(mymissedcall, Misscallfilter);
-
-        button_calltest.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent("com.example.kevin.calltransfer.MYI");
-                sendBroadcast(intent);
-            }
-        });*/
     }
 
 
@@ -87,7 +81,6 @@ public class MainActivity extends AppCompatActivity {
 
             }
             if (LastCallState == TelephonyManager.CALL_STATE_RINGING && CurrentCallState == TelephonyManager.CALL_STATE_IDLE) {
-//                Toast.makeText(arg0, "You are awesome", Toast.LENGTH_LONG).show();
                Intent intent = new Intent(MainActivity.this,Text_test.class);
                startActivity(intent);
 
@@ -97,10 +90,3 @@ public class MainActivity extends AppCompatActivity {
     }
 
 }
-
-/*class MyMissedCall extends BroadcastReceiver {
-    @Override
-    public void onReceive(Context context, Intent intent){
-        Toast.makeText(context, "You got a missed call", Toast.LENGTH_LONG).show();
-    }
-}*/

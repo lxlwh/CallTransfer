@@ -21,10 +21,10 @@
         </activity>
         <activity android:name=".CallLog_view"/>
         <activity android:name=".Text_test"/>
+        <activity android:name=".Mysetting"/>
         <receiver android:name=".PhoneStateReceiver"
             android:enabled="true"
             android:exported="true">
-
             <intent-filter>
                 <action android:name="android.intent.action.PHONE_STATE"/>
             </intent-filter>

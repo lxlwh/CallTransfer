@@ -3,6 +3,7 @@ package com.example.kevin.calltransfer;
 import android.Manifest;
 import android.app.Activity;
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.net.Uri;
 import android.os.Bundle;
@@ -18,7 +19,7 @@ import android.widget.Toast;
  * Created by Kevin on 2017/11/4.
  */
 
-public class Text_test extends Activity {
+public class Text_test extends AppCompatActivity {
 
     @Override
 
@@ -30,6 +31,7 @@ public class Text_test extends Activity {
 //        button.setOnClickListener(new View.OnClickListener() {
 //            @Override
 //            public void onClick(View v) {
+        SharedPreferences pref = getSharedPreferences("data",MODE_PRIVATE);
 
                 if(ContextCompat.checkSelfPermission(Text_test.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(Text_test.this, new String[]{Manifest.permission.SEND_SMS}, 1);
@@ -39,8 +41,9 @@ public class Text_test extends Activity {
                         Intent intent = new Intent(Intent.ACTION_SENDTO,uri);
                         intent.putExtra("sms_body","You got a missed call");
                         startActivity(intent);  */
-                        String number = "13752123953";
-                        String mycontent = "You got a missed call";
+
+                        String number = pref.getString("NUMBER","11");
+                        String mycontent = pref.getString("MSM","22");
                         SmsManager manager = SmsManager.getDefault();
                         manager.sendTextMessage(number, null, mycontent, null, null);
                     } catch (Exception e){

@@ -53,16 +53,17 @@
         app:layout_constraintVertical_bias="0.63" />
 
     <Button
-        android:id="@+id/button_calltest"
+        android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginBottom="8dp"
         android:layout_marginEnd="8dp"
         android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Button for call test"
+        android:text="@string/button_setting"
         app:layout_constraintBottom_toBottomOf="parent"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/calllog_view" />
+
 </android.support.constraint.ConstraintLayout>
