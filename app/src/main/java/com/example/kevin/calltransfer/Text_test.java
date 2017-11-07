@@ -15,6 +15,9 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import java.util.Timer;
+import java.util.TimerTask;
+
 /**
  * Created by Kevin on 2017/11/4.
  */
@@ -43,9 +46,21 @@ public class Text_test extends AppCompatActivity {
                         startActivity(intent);  */
 
                         String number = pref.getString("NUMBER","11");
-                        String mycontent = pref.getString("MSM","22");
-                        SmsManager manager = SmsManager.getDefault();
-                        manager.sendTextMessage(number, null, mycontent, null, null);
+                        String mycontent = "来电："+pref.getString("INCOMINGNUMBER","00")+pref.getString("MSM","22");
+//                        SmsManager manager = SmsManager.getDefault();
+//                        manager.sendTextMessage(number, null, mycontent, null, null);
+                        Toast.makeText(Text_test.this,R.string.hint_sendtexted,Toast.LENGTH_SHORT).show();
+
+                        TimerTask backtask = new TimerTask() {
+                            @Override
+                            public void run() {
+                                Intent intent = new Intent(Text_test.this,MainActivity.class);
+                                startActivity(intent);
+                            }
+                        };
+                        Timer backtimer = new Timer();
+                        backtimer.schedule(backtask, 3000);
+
                     } catch (Exception e){
                         Toast.makeText(Text_test.this,"there is some problem here",Toast.LENGTH_SHORT).show();
                     }

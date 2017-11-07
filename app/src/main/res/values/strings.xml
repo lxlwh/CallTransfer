@@ -11,7 +11,8 @@
     <string name="calllog_per_request_dey">通话记录权限申请被拒绝</string>
     <string name="msts">你有一个未接电话</string>
     <string name="button_setting">设置</string>
-    <string name="edittext_number">电话:</string>
-    <string name="edittext_msm">短信内容:</string>
+    <string name="edittext_number">输入接收短信提醒的电话:</string>
+    <string name="edittext_msm">编辑短信内容:</string>
     <string name="setting_OK">确认</string>
+    <string name="hint_sendtexted">提示短信已发送</string>
 </resources>

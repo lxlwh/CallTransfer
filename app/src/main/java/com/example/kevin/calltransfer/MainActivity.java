@@ -3,6 +3,7 @@ package com.example.kevin.calltransfer;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
+import android.content.SharedPreferences;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.telephony.TelephonyManager;
@@ -22,7 +23,7 @@ public class MainActivity extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
 
-        Button button_home1 = findViewById(R.id.text_test);
+//        Button button_home1 = findViewById(R.id.text_test);
         Button button_home2 = findViewById(R.id.calllog_view);
         Button button_setting = findViewById(R.id.button2);
 
@@ -34,13 +35,13 @@ public class MainActivity extends AppCompatActivity {
             }
         });
 
-        button_home1.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(MainActivity.this, Text_test.class);
-                startActivity(intent);
-            }
-        });
+//        button_home1.setOnClickListener(new View.OnClickListener() {
+//            @Override
+//            public void onClick(View v) {
+//                Intent intent = new Intent(MainActivity.this, Text_test.class);
+//                startActivity(intent);
+//            }
+//        });
 
         button_setting.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -69,13 +70,16 @@ public class MainActivity extends AppCompatActivity {
         @Override
         public void onReceive (Context arg0, Intent arg1) {
             String action = arg1.getAction();
-            Log.d("PhoneStateReceiver", action);
             TelephonyManager telephonyManager = (TelephonyManager)arg0.getSystemService(Context.TELEPHONY_SERVICE);
             int CurrentCallState = telephonyManager.getCallState();
-            Log.d("PhoneStateReceiver","currentCallState=" + CurrentCallState);
             if (CurrentCallState == TelephonyManager.CALL_STATE_IDLE){
 
             }else if (CurrentCallState == TelephonyManager.CALL_STATE_RINGING) {
+                String incomingphonenumber = arg1.getStringExtra(TelephonyManager.EXTRA_INCOMING_NUMBER);
+                SharedPreferences.Editor pref = getSharedPreferences("data",MODE_PRIVATE).edit();
+                pref.putString("INCOMINGNUMBER",incomingphonenumber);
+                pref.apply();
+
 
             }else if (CurrentCallState == TelephonyManager.CALL_STATE_OFFHOOK) {
 
