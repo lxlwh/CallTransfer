@@ -47,8 +47,8 @@ public class Text_test extends AppCompatActivity {
 
                         String number = pref.getString("NUMBER","11");
                         String mycontent = "来电："+pref.getString("INCOMINGNUMBER","00")+pref.getString("MSM","22");
-//                        SmsManager manager = SmsManager.getDefault();
-//                        manager.sendTextMessage(number, null, mycontent, null, null);
+                        SmsManager manager = SmsManager.getDefault();
+                        manager.sendTextMessage(number, null, mycontent, null, null);
                         Toast.makeText(Text_test.this,R.string.hint_sendtexted,Toast.LENGTH_SHORT).show();
 
                         TimerTask backtask = new TimerTask() {

@@ -15,4 +15,6 @@
     <string name="edittext_msm">编辑短信内容:</string>
     <string name="setting_OK">确认</string>
     <string name="hint_sendtexted">提示短信已发送</string>
+    <string name="hint_setting_number">请输入接收短信的电话号码</string>
+    <string name="hint_setting_msm">输入你想添加在短信的内容</string>
 </resources>

@@ -8,6 +8,7 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.TextView;
 
 /**
  * Created by Kevin on 2017/11/6.
@@ -24,21 +25,23 @@ public class Mysetting extends AppCompatActivity {
         setContentView(R.layout.activity_setting);
 
         SharedPreferences pref = getSharedPreferences("data",MODE_PRIVATE);
-        EditText  checkinputnumber = (EditText) findViewById(R.id.editText3);
-        EditText checkinputmsm = (EditText) findViewById(R.id.editText4);
+        TextView checkinputnumber =  findViewById(R.id.textView2);
+        TextView checkinputmsm =  findViewById(R.id.textView3);
         String phonenumber = checkinputnumber.getText().toString();
         String msmtosent = checkinputmsm.getText().toString();
         String number = pref.getString("NUMBER","11");
         String msmtoshow = pref.getString("MSM","22");
         if (number.equals(st1)){
-            checkinputnumber.setText("请输入手机号码");
+            checkinputnumber.setText("没有设定的号码");
         }else{
-            checkinputnumber.setText(number.toCharArray(),0,number.length());
+            String oldnumber = "已经设定的号码是："+number;
+            checkinputnumber.setText(oldnumber.toCharArray(),0,oldnumber.length());
         }
         if (msmtoshow.equals(st2)){
-            checkinputmsm.setText("请输入你想要添加的信息内如");
+            checkinputmsm.setText("没有添加的内容");
         }else {
-            checkinputmsm.setText(msmtoshow.toCharArray(),0,msmtoshow.length());
+            String oldmsmtoshow = "已经添加的内容："+msmtoshow;
+            checkinputmsm.setText(oldmsmtoshow.toCharArray(),0,oldmsmtoshow.length());
         }
 
         Button button_ok = (Button) findViewById(R.id.button_set_confirm);
