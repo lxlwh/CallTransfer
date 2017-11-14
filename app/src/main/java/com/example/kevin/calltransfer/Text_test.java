@@ -1,4 +1,4 @@
-package com.example.kevin.calltransfer;
+/*package com.example.kevin.calltransfer;
 
 import android.Manifest;
 import android.app.Activity;
@@ -22,7 +22,7 @@ import java.util.TimerTask;
  * Created by Kevin on 2017/11/4.
  */
 
-public class Text_test extends AppCompatActivity {
+/*public class Text_test extends AppCompatActivity {
 
     @Override
 
@@ -45,7 +45,7 @@ public class Text_test extends AppCompatActivity {
                         intent.putExtra("sms_body","You got a missed call");
                         startActivity(intent);  */
 
-                        String number = pref.getString("NUMBER","11");
+/*                        String number = pref.getString("NUMBER","11");
                         String mycontent = "来电："+pref.getString("INCOMINGNUMBER","00")+pref.getString("MSM","22");
                         SmsManager manager = SmsManager.getDefault();
                         manager.sendTextMessage(number, null, mycontent, null, null);
@@ -69,4 +69,4 @@ public class Text_test extends AppCompatActivity {
 //            }
 //        });
     }
-}
+}*/
