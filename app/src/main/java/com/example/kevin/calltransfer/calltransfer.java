@@ -4,16 +4,19 @@ import android.Manifest;
 import android.app.Notification;
 import android.app.PendingIntent;
 import android.app.Service;
+import android.content.BroadcastReceiver;
 import android.content.Context;
 import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
 import android.graphics.BitmapFactory;
+import android.os.Binder;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
 import android.support.v4.content.ContextCompat;
+import android.support.v4.content.LocalBroadcastManager;
 import android.telephony.SmsManager;
 import android.telephony.TelephonyManager;
 import android.widget.Toast;
@@ -23,8 +26,9 @@ import java.util.TimerTask;
 
 public class calltransfer extends Service {
 
-    private IntentFilter intentfilter;
+    private IntentFilter intentfilter, intentfilter2;
     private MyPhoneStateReceiver myphonestaterec;
+    private LocalBroadcastManager localBroadcastManager;
 
     public calltransfer() {
     }
@@ -43,6 +47,9 @@ public class calltransfer extends Service {
                 .setContentIntent(pi)
                 .build();
         startForeground(1, notification);
+        localBroadcastManager = LocalBroadcastManager.getInstance(this);
+        Intent intent1 = new Intent("com.example.kevin.svchintchange");
+        localBroadcastManager.sendBroadcast(intent1);
     }
 
     @Override
@@ -56,6 +63,7 @@ public class calltransfer extends Service {
     @Override
     public IBinder onBind(Intent intent) {
         // TODO: Return the communication channel to the service.
+//        return svcflag;
         throw new UnsupportedOperationException("Not yet implemented");
     }
 
@@ -64,6 +72,8 @@ public class calltransfer extends Service {
         super.onDestroy();
         unregisterReceiver(myphonestaterec);
     }
+
+
 
     private class MyPhoneStateReceiver extends PhoneStateReceiver {
         private   int LastCallState = TelephonyManager.CALL_STATE_IDLE;
@@ -87,35 +97,16 @@ public class calltransfer extends Service {
             if (LastCallState == TelephonyManager.CALL_STATE_RINGING && CurrentCallState == TelephonyManager.CALL_STATE_IDLE) {
                 SharedPreferences pref = getSharedPreferences("data",MODE_PRIVATE);
 
-//                if(ContextCompat.checkSelfPermission(calltransfer.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
-//                    ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS}, 1);
-//                }else {
                     try {
-/*                      Uri uri = Uri.parse("smsto:13752123953");
-                        Intent intent = new Intent(Intent.ACTION_SENDTO,uri);
-                        intent.putExtra("sms_body","You got a missed call");
-                        startActivity(intent);  */
 
                         String number = pref.getString("NUMBER","11");
                         String mycontent = "来电："+pref.getString("INCOMINGNUMBER","00")+pref.getString("MSM","22");
                         SmsManager manager = SmsManager.getDefault();
                         manager.sendTextMessage(number, null, mycontent, null, null);
-//                        Toast.makeText(Text_test.this,R.string.hint_sendtexted,Toast.LENGTH_SHORT).show();
-
-//                        TimerTask backtask = new TimerTask() {
-//                            @Override
-//                            public void run() {
-//                                Intent intent = new Intent(Text_test.this,MainActivity.class);
-//                                startActivity(intent);
-//                            }
-//                        }
-//                        Timer backtimer = new Timer();
-//                        backtimer.schedule(backtask, 3000);
 
                     } catch (Exception e){
 //                        Toast.makeText(Text_test.this,"there is some problem here",Toast.LENGTH_SHORT).show();
                     }
-//                }
 
             }
             LastCallState = CurrentCallState;

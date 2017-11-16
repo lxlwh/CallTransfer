@@ -45,6 +45,14 @@ public class Mysetting extends AppCompatActivity {
         }
 
         Button button_ok = (Button) findViewById(R.id.button_set_confirm);
+        Button button_back = (Button) findViewById(R.id.button_setting_back);
+
+        button_back.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                finish();
+            }
+        });
         button_ok.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -57,8 +65,10 @@ public class Mysetting extends AppCompatActivity {
                 pref.putString("MSM",msmtosent);
                 pref.apply();
 
-                Intent intent = new Intent(Mysetting.this,MainActivity.class);
-                startActivity(intent);
+//                finish();
+//                Intent intent = new Intent(Mysetting.this,MainActivity.class);
+//                startActivity(intent);
+
 
             }
         });

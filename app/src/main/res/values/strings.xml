@@ -11,15 +11,18 @@
     <string name="calllog_per_request_dey">通话记录权限申请被拒绝</string>
     <string name="msts">你有一个未接电话</string>
     <string name="button_setting">设置</string>
+    <string name="buttong_setting_back">返回</string>
     <string name="edittext_number">输入接收短信提醒的电话:</string>
+    <string name="edittext_donenumber">没有设定接收提醒短信手机号码</string>
+    <string name="edittext_donemsm">暂时没有额外添加的提醒内如</string>
     <string name="edittext_msm">编辑短信内容:</string>
     <string name="setting_OK">确认</string>
     <string name="hint_sendtexted">提示短信已发送</string>
     <string name="hint_setting_number">请输入接收短信的电话号码</string>
     <string name="hint_setting_msm">输入你想添加在短信的内容</string>
-    <string name="button_startCTsvc">启动电话转移服务</string>
-    <string name="button_stopCTsvc">停止电话转移服务</string>
-    <string name="textview_SVC_hint_default">电话转移服务没有开启</string>
-    <string name="textview_SVC_hint_start">电话转移服务正在运行</string>
-    <string name="textview_SVC_hint_stop">电话转移服务已经停止</string>
+    <string name="button_startCTsvc">启动未接电话提醒服务</string>
+    <string name="button_stopCTsvc">停止未接电话提醒服务</string>
+    <string name="textview_SVC_hint_default">提醒服务没有开启</string>
+    <string name="textview_SVC_hint_start">提醒服务正在运行</string>
+    <string name="textview_SVC_hint_stop">提醒服务已经停止</string>
 </resources>
