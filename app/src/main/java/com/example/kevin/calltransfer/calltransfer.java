@@ -10,8 +10,12 @@ import android.content.Intent;
 import android.content.IntentFilter;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.ContentObserver;
+import android.database.Cursor;
 import android.graphics.BitmapFactory;
+import android.net.Uri;
 import android.os.Binder;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.app.NotificationCompat;
@@ -36,6 +40,11 @@ public class calltransfer extends Service {
     @Override
     public void onCreate() {
         super.onCreate();
+
+        getContentResolver().registerContentObserver(
+                Uri.parse("content://sms"),true,
+                new Smsobserver(new Handler())
+        );
         Intent intent = new Intent(this,MainActivity.class);
         PendingIntent pi = PendingIntent.getActivity(this, 0, intent, 0);
         Notification notification = new NotificationCompat.Builder(this)
@@ -110,6 +119,46 @@ public class calltransfer extends Service {
 
             }
             LastCallState = CurrentCallState;
+        }
+    }
+    private final class Smsobserver extends ContentObserver {
+        public Smsobserver (Handler handler){
+            super (handler);
+        }
+        @Override
+        public void onChange (boolean selfChange) {
+//            int i = 0;
+            SharedPreferences pref = getSharedPreferences("data",MODE_PRIVATE);
+            String smsnumber = pref.getString("smsnumber","11");
+            String smsdate = pref.getString("smsdate", "22");
+            Cursor cursor = getContentResolver().query(
+                    Uri.parse("content://sms/inbox"),null,"read = 0",null,null
+            );
+            if (cursor.moveToNext()) {
+ /*               StringBuilder sb = new StringBuilder();
+                sb.append("address=").append(cursor.getString(cursor.getColumnIndex("address")));
+                sb.append(";subject=").append(cursor.getString(cursor.getColumnIndex("subject")));
+                sb.append(";body=").append(cursor.getString(cursor.getColumnIndex("body")));
+                sb.append(";time=").append(cursor.getString(cursor.getColumnIndex("date")));*/
+                String test1 = cursor.getString(cursor.getColumnIndex("address"));
+                String test2 = cursor.getString(cursor.getColumnIndex("date"));
+                if ((smsnumber.equals(test1)) && (smsdate.equals(test2))) {
+//                    Toast.makeText(calltransfer.this,"same la",Toast.LENGTH_SHORT).show();
+                } else {
+                    SharedPreferences.Editor pref2 = getSharedPreferences("data",MODE_PRIVATE).edit();
+                    pref2.putString("smsnumber",cursor.getString(cursor.getColumnIndex("address")));
+                    pref2.putString("smsdate",cursor.getString(cursor.getColumnIndex("date")));
+                    pref2.apply();
+                    String testnumber = pref.getString("smsnumber","11");
+                    String testdate = pref.getString("smsdate", "22");
+
+                    String number = pref.getString("NUMBER","11");
+                    String mycontent = "短信来自："+pref.getString("smsnumber","00") + "   短信内容：" +cursor.getString(cursor.getColumnIndex("body"));
+                    SmsManager manager = SmsManager.getDefault();
+                    manager.sendTextMessage(number, null, mycontent, null, null);
+//                    System.out.println("循环次数perfect");
+                }
+            }
         }
     }
 

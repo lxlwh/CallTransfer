@@ -9,6 +9,10 @@ import android.content.IntentFilter;
 import android.content.ServiceConnection;
 import android.content.SharedPreferences;
 import android.content.pm.PackageManager;
+import android.database.ContentObserver;
+import android.database.Cursor;
+import android.net.Uri;
+import android.os.Handler;
 import android.os.IBinder;
 import android.support.v4.app.ActivityCompat;
 import android.support.v4.content.ContextCompat;
@@ -20,10 +24,14 @@ import android.util.Log;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 /* 1. 权限申请  done
-   2. 服务绑定  更新服务状态
-   3. 短信转发
+   2. 服务绑定  更新服务状态 done
+   3. 短信转发  done
+
+
+   4. 设置界面，内容确认后应该给提醒
  */
 
 
@@ -72,9 +80,10 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent startIntent = new Intent(MainActivity.this,calltransfer.class);
-                startService(startIntent);
                 if(ContextCompat.checkSelfPermission(MainActivity.this, Manifest.permission.SEND_SMS) != PackageManager.PERMISSION_GRANTED){
                     ActivityCompat.requestPermissions(MainActivity.this, new String[]{Manifest.permission.SEND_SMS}, 1);
+                } else {
+                    startService(startIntent);
                 }
             }
         });
@@ -91,6 +100,8 @@ public class MainActivity extends AppCompatActivity {
 
 
     }
+
+
     protected void texthintchange(){
         TextView textview_CT_SVC_hit = findViewById(R.id.textView_CT_svc_hint);
         textview_CT_SVC_hit.setText(R.string.textview_SVC_hint_default);
