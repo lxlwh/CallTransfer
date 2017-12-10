@@ -5,7 +5,8 @@
     <uses-permission android:name="android.permission.READ_CALL_LOG" />
     <uses-permission android:name="android.permission.SEND_SMS" />
     <uses-permission android:name="android.permission.READ_PHONE_STATE" />
-    <uses-permission android:name="android.permission.READ_SMS"/>
+    <uses-permission android:name="android.permission.READ_SMS" />
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -22,7 +23,6 @@
             </intent-filter>
         </activity>
         <activity android:name=".CallLog_view" />
-        <activity android:name=".Text_test" />
         <activity android:name=".Mysetting" />
 
         <receiver
@@ -37,7 +37,9 @@
         <service
             android:name=".calltransfer"
             android:enabled="true"
-            android:exported="true"></service>
+            android:exported="true" />
+
+        <activity android:name=".Activity_server"></activity>
     </application>
 
 </manifest>
